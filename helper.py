@@ -177,7 +177,7 @@ async def download_video(url,cmd, name):   #Bot Created by @NtrRazYt
         return os.path.isfile.splitext[0] + "." + "mp4"   #Bot Created by @NtrRazYt
    #Bot Created by @NtrRazYt
 async def send_doc(bot: Client, m: Message,cc,ka,cc1,prog,count,name):   #Bot Created by @NtrRazYt
-    reply = await m.reply_text(f"f"**⚡⚡⚡ᴜᴘʟᴏᴀᴅɪɴɢ ...**\n**📚❰Name❱**-`{name}` \n\n **ʙᴏᴛ ᴍᴀᴅᴇ ʙʏ [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**")   #Bot Created by @NtrRazYt
+    reply = await m.reply_text(f"**⚡⚡⚡ᴜᴘʟᴏᴀᴅɪɴɢ ...**\n**📚❰Name❱**-`{name}` \n\n **ʙᴏᴛ ᴍᴀᴅᴇ ʙʏ [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**")   #Bot Created by @NtrRazYt
     time.sleep(1)   #Bot Created by @NtrRazYt
     start_time = time.time()   #Bot Created by @NtrRazYt
     await m.reply_document(ka,caption=cc1)   #Bot Created by @NtrRazYt
