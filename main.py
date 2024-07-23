@@ -177,7 +177,7 @@ async def account_login(bot: Client, m: Message):
               url = url.replace(url.split("/")[-1], raw_text2+".m3u8")
 
             elif "edge.api.brightcove.com" in url:
-                 al =url.split("/")[-1]
+                al = url.split("/")[-1]
             urlb = url.replace("/"+al, " ")
             bcov = al.replace("master.m3u8?", "")
             headers = {
