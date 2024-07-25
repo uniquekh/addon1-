@@ -1,7 +1,7 @@
 async-lru==2.0.2
 cloudscraper
 beautifulsoup4==4.9.3
-ffmpeg==4.4.4
+ffmpeg
 helper
 certifi==2023.5.7
 bs4==0.0.1
