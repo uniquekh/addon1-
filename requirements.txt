@@ -1,8 +1,7 @@
 async-lru==2.0.2
 cloudscraper
 beautifulsoup4==4.9.3
-ffmpeg
-pytube
+ffmpeg==4.4.4
 helper
 certifi==2023.5.7
 bs4==0.0.1
@@ -20,7 +19,7 @@ soupsieve==2.4.1
 TgCrypto==1.2.5
 urllib3==2.0.3
 websockets==11.0.3
-yt-dlp==2023.6.22
+yt-dlp==2024.7.25
 motor
 aiohttp==3.8.4
 aiofiles
