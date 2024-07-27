@@ -28,19 +28,6 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
 from base64 import b64encode, b64decode
 
-headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0',
-                'Accept': 'application/json;pk=BCpkADawqM22pe6lllPFfUMQfj47agK1PJ_Sb3P_jty9S9_yCNwT87DTolChZKFm091O3K6UCQ61qHUHBgJg811eub1T1Bqn2HHYPkGrrknKaHDgj-ofQZnWBUZJNMaKHfDFd5HoVbeQtqEgVDJHMO9Oq7q5YLIaX9MYaaDreXLDWkxzVvrng6HXTz3whbyoYzOv_4bks3_8HOqCcqkbQL6XZehh398zRw6zPjO42okH0WoX-KNmjcICMpg',
-                'Accept-Language': 'en-US,en;q=0.5',
-               # 'Accept-Encoding': 'gzip, deflate, br, zstd',
-                'Origin': 'https://web.careerwill.com',
-                'Connection': 'keep-alive',
-                'Referer': 'https://web.careerwill.com/',
-                'Sec-Fetch-Dest': 'empty',
-                'Sec-Fetch-Mode': 'cors',
-                'Sec-Fetch-Site': 'cross-site',
-            }
-
 OWNER = int(os.environ.get("OWNER", 7326397503))      #replace your user id 
 try: 
     ADMINS=[] 
@@ -189,13 +176,9 @@ async def account_login(bot: Client, m: Message):
               url = url.replace(url.split("/")[-1], raw_text2+".m3u8")
 
             elif "edge.api.brightcove.com" in url:
-                link = url.split("/")[-1]
-                urlb = url.replace("/"+link, " ")
-                bcov = link.replace("master.m3u8?", " ")
-                r= requests.get('urlb', headers=headers)
-                lin = r.json()['sources'][5]
-                fin = lin['src']
-                url = fnl+"&"+bcov
+              bcov = url.split("/")[-1].replace("master.m3u8?", "")
+              url = requests.get(url=url.replace("/"+url.split("/")[-1], ""), headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0', 'Accept': 'application/json;pk=BCpkADawqM22pe6lllPFfUMQfj47agK1PJ_Sb3P_jty9S9_yCNwT87DTolChZKFm091O3K6UCQ61qHUHBgJg811eub1T1Bqn2HHYPkGrrknKaHDgj-ofQZnWBUZJNMaKHfDFd5HoVbeQtqEgVDJHMO9Oq7q5YLIaX9MYaaDreXLDWkxzVvrng6HXTz3whbyoYzOv_4bks3_8HOqCcqkbQL6XZehh398zRw6zPjO42okH0WoX-KNmjcICMpg', 'Accept-Language': 'en-US,en;q=0.5', 'Origin': 'https://web.careerwill.com', 'Connection': 'keep-alive', 'Referer': 'https://web.careerwill.com/', 'Sec-Fetch-Dest': 'empty', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Site': 'cross-site',}).json()['sources'][5]['src']+"&"+bcov
+                
             elif "jw-prod" in url:
               url = url.replace(url.split("/")[-1], res+'.mp4')
            # elif "youtu" in url:
