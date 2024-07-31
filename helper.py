@@ -190,15 +190,15 @@ async def send_doc(bot: Client, m: Message,cc,ka,cc1,prog,count,name):   #Bot Cr
 async def send_vid(bot: Client, m: Message,cc,filename,thumb,name,prog):   #Bot Created by @NtrRazYt
     await prog.delete (True)   #Bot Created by @NtrRazYt
     reply = await m.reply_text(f"**⚡⚡⚡ᴜᴘʟᴏᴀᴅɪɴɢ ...**\n**📚❰Name❱**-`{name}` \n\n **ʙᴏᴛ ᴍᴀᴅᴇ ʙʏ [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**")   #Bot Created by @NtrRazYt
-      #Bot Created by @NtrRazYt
     subprocess.run(f'ffmpeg -i "{filename}" -ss 00:01:00 -vframes 1 "{filename}.jpg"', shell=True)   #Bot Created by @NtrRazYt
-     try:   #Bot Created by @NtrRazYt
+    
+    try:   
         if thumb == "no":   #Bot Created by @NtrRazYt
             thumbnail = f"{filename}.jpg"   #Bot Created by @NtrRazYt
         else:   #Bot Created by @NtrRazYt
             thumbnail = thumb   #Bot Created by @NtrRazYt
     except Exception as e:   #Bot Created by @NtrRazYt
-        await m.reply_text(str(e))   #Bot Created by @NtrRazYt
+        await m.reply_text(str(e))  #Bot Created by @NtrRazYt
    #Bot Created by @NtrRazYt
     dur = int(duration(filename))   #Bot Created by @NtrRazYt
    #Bot Created by @NtrRazYt
