@@ -197,7 +197,7 @@ async def account_login(bot: Client, m: Message):
                     'Sec-Fetch-Site': 'cross-site',
                     # Requests doesn't support trailers
                    # 'TE': 'trailers',
-                },).json()['sources'][5]['src'] +"&"+bcov).text.split("#")[3].split("https")[-1]
+                },).json()['sources'][5]['src']).text.split("#")[3].split("https")[-1] +"&"+bcov
               
             elif "jw-prod" in url:
               url = url.replace(url.split("/")[-1], res+'.mp4')
