@@ -179,7 +179,7 @@ async def account_login(bot: Client, m: Message):
 
             elif "edge.api.brightcove.com" in url:
               bcov = url.split("/")[-1].replace("master.m3u8?", "")
-              url = "https"+requests.get(requests.get(
+              url = (requests.get(
                     url = url.replace("/"+url.split("/")[-1], ""),
                     headers= {
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0',
@@ -197,7 +197,7 @@ async def account_login(bot: Client, m: Message):
                     'Sec-Fetch-Site': 'cross-site',
                     # Requests doesn't support trailers
                    # 'TE': 'trailers',
-                },).json()['sources'][5]['src'] +"&"+bcov).text.split("#")[-2].split("https")[-1]
+                },).json()['sources'][5]['src'] +"&"+bcov)    #.text.split("#")[-2].split("https")[-1]
               
             elif "jw-prod" in url:
               url = url.replace(url.split("/")[-1], res+'.mp4')
