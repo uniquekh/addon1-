@@ -698,6 +698,22 @@ async def account_login(bot: Client, m: Message):
                     f.write(f"{name}:{url}\n")
     except:
         await m.reply_text("Scrapping page_10>>>")
+
+    try:
+       sub_ids = raw_text4.split(',')
+       for l in range(0, len(sub_ids)):
+            ids = sub_ids[l]
+            params11 = {'page': '11','tag': '','contentType': 'videos','ut': ''}
+            response11 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{ids}/contents', params=params11, headers=headers).json()["data"]
+            for i in response11:
+                url = i["videoDetails"]["videoUrl"]
+                name = i["topic"]
+                # print(name)
+                # print(url)
+                with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
+                    f.write(f"{name}:{url}\n")
+    except:
+        print("scrapping_page11>>>")
     try:
         await m.reply_document(f"{raw_textj}.txt")
 
