@@ -542,8 +542,8 @@ async def account_login(bot: Client, m: Message):
                 # print(url)
                 with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
                     f.write(f"{name}:{url}\n")
-    except Exception as e:
-        await m.reply_text(str(e))
+    except:
+        await m.reply_text("Scrapping page_1>>>")
 
     try:
        sub_ids = raw_text4.split(',')
@@ -558,8 +558,8 @@ async def account_login(bot: Client, m: Message):
                 # print(url)
                 with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
                     f.write(f"{name}:{url}\n")
-    except Exception as e:
-        await m.reply_text(str(e))
+    except:
+        await m.reply_text("Scrapping page_2>>>")
 
 
     try:
@@ -575,8 +575,8 @@ async def account_login(bot: Client, m: Message):
                 # print(url)
                 with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
                     f.write(f"{name}:{url}\n")
-    except Exception as e:
-        await m.reply_text(str(e))
+    except:
+        await m.reply_text("Scrapping page_3>>>")
 
     
     try:
@@ -592,8 +592,8 @@ async def account_login(bot: Client, m: Message):
                 # print(url)
                 with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
                     f.write(f"{name}:{url}\n")
-    except Exception as e:
-        await m.reply_text(str(e))
+    except:
+        await m.reply_text("Scrapping page_4>>>")
 
 
 
@@ -611,8 +611,8 @@ async def account_login(bot: Client, m: Message):
                 # print(url)
                 with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
                     f.write(f"{name}:{url}\n")
-    except Exception as e:
-        await m.reply_text(str(e))
+    except:
+        await m.reply_text("Scrapping page_5>>>")
 
 
 
@@ -629,8 +629,8 @@ async def account_login(bot: Client, m: Message):
                 # print(url)
                 with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
                     f.write(f"{name}:{url}\n")
-    except Exception as e:
-        await m.reply_text(str(e))
+    except:
+        await m.reply_text("Scrapping page_6>>>")
 
 
     try:
@@ -646,8 +646,8 @@ async def account_login(bot: Client, m: Message):
                 # print(url)
                 with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
                     f.write(f"{name}:{url}\n")
-    except Exception as e:
-        await m.reply_text(str(e))
+    except:
+        await m.reply_text("Scrapping page_7>>>")
 
 
     try:
@@ -663,8 +663,8 @@ async def account_login(bot: Client, m: Message):
                 # print(url)
                 with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
                     f.write(f"{name}:{url}\n")
-    except Exception as e:
-        await m.reply_text(str(e))
+    except:
+        await m.reply_text("Scrapping page_8>>>")
 
     try:
        sub_ids = raw_text4.split(',')
@@ -679,8 +679,8 @@ async def account_login(bot: Client, m: Message):
                 # print(url)
                 with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
                     f.write(f"{name}:{url}\n")
-    except Exception as e:
-        await m.reply_text(str(e))
+    except:
+        await m.reply_text("Scrapping page_9>>>")
 
 
     try:
@@ -696,8 +696,8 @@ async def account_login(bot: Client, m: Message):
                 # print(url)
                 with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
                     f.write(f"{name}:{url}\n")
-    except Exception as e:
-        await m.reply_text(str(e))
+    except:
+        await m.reply_text("Scrapping page_10>>>")
     try:
         await m.reply_document(f"{raw_textj}.txt")
 
