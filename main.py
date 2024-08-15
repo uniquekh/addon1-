@@ -770,8 +770,22 @@ async def account_login(bot: Client, m: Message):
 
 
     try:
+        headers3 = {
+        'sec-ch-ua': '"Not)A;Brand";v="99", "Google Chrome";v="127", "Chromium";v="127"',
+        'integration-with': '',
+        'sec-ch-ua-mobile': '?1',
+        'client-version': '5.4.9',
+        'Authorization': f'Bearer {token}', 
+        'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Mobile Safari/537.36',
+        'Accept': 'application/json, text/plain, */*',
+        'Referer': 'https://www.pw.live/',
+        'randomId': '9e444000-b5d0-453d-9bb6-223e5e44560e',
+        'client-id': '5eb393ee95fab7468a79d189',
+        'client-type': 'WEB',
+       'sec-ch-ua-platform': '"Android"',
+        }
         payload = {}
-        r = requests.get(f'https://api.penpencil.co/v3/batches/{raw_text3}/details', headers=headers, data=payload)
+        r = requests.get(f'https://api.penpencil.co/v3/batches/{raw_text3}/details', headers=headers3, data=payload)
 
         a =r.json()['data']['subjects']
         # d = a['data']['subjects']
@@ -809,7 +823,7 @@ async def account_login(bot: Client, m: Message):
 
     try:
         await m.reply_document(f"{raw_textj}.txt")
-        await m.reply_text("done")
+        m.reply_text("done")
 
     except Exception as e:
         await m.reply_text(str(e))
