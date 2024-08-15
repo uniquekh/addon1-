@@ -466,6 +466,57 @@ async def account_login(bot: Client, m: Message):
 
 @bot.on_message(filters.command(["pw"]))
 async def account_login(bot: Client, m: Message):
+    editabl = await m.reply_text(
+        "enter your phone no: "
+    )
+    input: Message = await bot.listen(editabl.chat.id)
+    phone=input.text
+    headers = {
+    'sec-ch-ua': '"Not)A;Brand";v="99", "Google Chrome";v="127", "Chromium";v="127"',
+    'integration-with': '',
+    'sec-ch-ua-mobile': '?1',
+    'client-version': '5.4.9',
+    'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Mobile Safari/537.36',
+    'Content-Type': 'application/json',
+    'Accept': 'application/json, text/plain, */*',
+    'Referer': 'https://www.pw.live/',
+    'Client-Type': 'WEB',
+    'sec-ch-ua-platform': '"Android"',
+    }
+
+    params = {
+    'smsType': '0',
+    }
+
+    json_data = {
+        'username': phone,
+    'countryCode': '+91',
+    'organizationId': '5eb393ee95fab7468a79d189',
+    }
+    otp = requests.post('https://api.penpencil.co/v1/users/get-otp', params=params, headers=headers, json=json_data)
+    
+    editablw = await m.reply_text(
+        "enter your phone no: "
+    )
+    input: Message = await bot.listen(editablw.chat.id)
+    otp=input.text
+
+    json_data = {
+    'username': phone,
+    'otp': int(otp),
+    'client_id': 'system-admin',
+    'grant_type': 'password',
+    'organizationId': '5eb393ee95fab7468a79d189',
+    'latitude': 0,
+    'longitude': 0,
+    }
+
+    response = requests.post('https://api.penpencil.co/v3/oauth/token', headers=headers, json=json_data)
+# print(response)
+    token = response.json()['data']['access_token']
+    await m.reply_text(f'{token}')
+
+    
     editable = await m.reply_text(
         "Send **token** in this manner otherwise bot will not respond.\n\nSend like this:-  **eyJhbGc......LEI_5M**"
     )  
