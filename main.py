@@ -493,10 +493,10 @@ async def account_login(bot: Client, m: Message):
     a = response.json()
     print("you have these batches:\n")
     for i in a['data']:
-    # v = i['batch']['_id']
-        # batch_name =i['batch']['name']
+        v = i['batch']['_id']
+        batch_name =i['batch']['name']
         # batches = i['batch']['name']+":"+i['batch']['_id']
-        await m.reply_text(f'`{i['batch']['name']}`: `{i['batch']['_id']}`')
+        await m.reply_text(f'`{batch_name}`: `{v}`')
 
     editable1= await m.reply_text("**Now send the Batch ID to Download**")
     input3: message = await bot.listen(editable1.chat.id)
@@ -527,7 +527,7 @@ async def account_login(bot: Client, m: Message):
     inputj: message = await bot.listen(editablej.chat.id)
     raw_textj =  inputj.text
 
-    editable2= await m.reply_text(f"**Enter this to download full batch :-**\n`{data['_id']},`")
+    editable2= await m.reply_text(f"**Enter this to download full batch :-**\n`{subject_id},`")
     input4 : message = await bot.listen(editable2.chat.id)
     raw_text4 = input4.text
     try:
