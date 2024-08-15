@@ -496,7 +496,7 @@ async def account_login(bot: Client, m: Message):
     otp = requests.post('https://api.penpencil.co/v1/users/get-otp', params=params, headers=headers, json=json_data)
     
     editablw = await m.reply_text(
-        "enter your phone no: "
+        "enter otp: "
     )
     input: Message = await bot.listen(editablw.chat.id)
     otp=input.text
@@ -539,10 +539,10 @@ async def account_login(bot: Client, m: Message):
     'mode': '1',
     'sort': 'TAG_LIST',
     }
-    await editable.edit("**You have these Batches :-\n\nBatch ID : Batch Name**")
+    await m.replt_text("**You have these Batches :-\n\n Batch ID : Batch Name**")
     response = requests.get('https://api.penpencil.co/v3/batches/all-purchased-batches', params=params, headers=headers)
     a = response.json()
-    print("you have these batches:\n")
+    # print("you have these batches:\n")
     d = a['data']
     for i in d:
         v = i['batch']['_id']
