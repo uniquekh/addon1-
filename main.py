@@ -464,8 +464,303 @@ async def account_login(bot: Client, m: Message):
 #     await m.reply_text("**ᴅᴏɴᴇ ʙᴏꜱꜱ🌟**") 
 
 
+@bot.on_message(filters.command(["pw"]))
+async def account_login(bot: Client, m: Message):
+    editable = await m.reply_text(
+        "Send **token** in this manner otherwise bot will not respond.\n\nSend like this:-  **eyJhbGc......LEI_5M**"
+    )  
+    input1: Message = await bot.listen(editable.chat.id)
+    token=input1.text
+    headers = {
+    'sec-ch-ua': '"Not)A;Brand";v="99", "Google Chrome";v="127", "Chromium";v="127"',
+    'integration-with': '',
+    'sec-ch-ua-mobile': '?1',
+    'client-version': '5.4.9',
+    'Authorization': f"Bearer {token}",
+    'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Mobile Safari/537.36',
+    'Accept': 'application/json, text/plain, */*',
+    'Referer': 'https://www.pw.live/',
+    'client-type': 'WEB',
+    'sec-ch-ua-platform': '"Android"',
+    }
+    params = {
+    'page': '1',
+    'mode': '1',
+    'sort': 'TAG_LIST',
+    }
+    await editable.edit("**You have these Batches :-\n\nBatch ID : Batch Name**")
+    response = requests.get('https://api.penpencil.co/v3/batches/all-purchased-batches', params=params, headers=headers)
+    a = response.json()
+    print("you have these batches:\n")
+    for i in a['data']:
+    # v = i['batch']['_id']
+        # batch_name =i['batch']['name']
+        # batches = i['batch']['name']+":"+i['batch']['_id']
+        await m.reply_text(f'`{i['batch']['name']}`: `{i['batch']['_id']}`')
+
+    editable1= await m.reply_text("**Now send the Batch ID to Download**")
+    input3: message = await bot.listen(editable1.chat.id)
+    raw_text3 =  input3.text
+    payload = {}
+    headers1 = {
+        'sec-ch-ua': '"Not)A;Brand";v="99", "Google Chrome";v="127", "Chromium";v="127"',
+        'integration-with': '',
+        'sec-ch-ua-mobile': '?1',
+        'client-version': '5.4.9',
+        'Authorization': f"Bearer {token}",
+        'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Mobile Safari/537.36',
+        'Accept': 'application/json, text/plain, */*',
+        'Referer': 'https://www.pw.live/',
+        'client-type': 'WEB',
+        'sec-ch-ua-platform': '"Android"',
+#   'Cookie': 'x-amz-continuous-deployment-state=AYABeEAdCL027YzN5fx0KWqpA98APgACAAFEAB1kMXo0bGplZDl2eXpkOS5jbG91ZGZyb250Lm5ldAABRwAVRzAwNDA5MDAzQURFRUhMNkVIV1lOAAEAAkNEABpDb29raWUAAACAAAAADIgcEpNVKYl8cTt1SwAwaGW84pDUxmszb2sKOJZCAIHdx6LNKBRofeufrn%2FtCk64MlNUyjryvaxW+ZtnwwkhAgAAAAAMAAQAAAAAAAAAAAAAAAAAAB8GReBBj0Dpfrk6CtvR4tf%2F%2F%2F%2F%2FAAAAAQAAAAAAAAAAAAAAAQAAAAxcNpgxvmiKkO39ZEga6VeWsPLdbiR7wvCGQaNpbiR7wvCGQaNpbiR7wvCGQaNpbiR7wvCGQaNpbiR7wvCGQaNp'
+    }
+
+    responsei = requests.get(f'https://api.penpencil.co/v3/batches/{raw_text3}/details', headers=headers1, data=payload)
+    a =responsei.json()['data']['subjects']
+    for data in a:
+        subject_id=f"{data['_id']},"
+        # await m.reply_text(f"{data
+        # ['_id']},")
+
+    editablej= await m.reply_text("**Now send the Batch name to Download**")
+    inputj: message = await bot.listen(editablej.chat.id)
+    raw_textj =  inputj.text
+
+    editable2= await m.reply_text(f"**Enter this to download full batch :-**\n`{data['_id']},`")
+    input4 : message = await bot.listen(editable2.chat.id)
+    raw_text4 = input4.text
+    try:
+       sub_ids = raw_text4.split(',')
+       for l in range(0, len(sub_ids)):
+            ids = sub_ids[l]
+            params1 = {'page': '1','tag': '','contentType': 'videos','ut': ''}
+            response3 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{ids}/contents', params=params1, headers=headers).json()["data"]
+            for i in response3:
+                url = i["videoDetails"]["videoUrl"]
+                name = i["topic"]
+                # print(name)
+                # print(url)
+                with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
+                    f.write(f"{name}:{url}\n")
+    except:
+        await m.reply_text("Scrapping page_1>>>")
+
+    try:
+       sub_ids = raw_text4.split(',')
+       for l in range(0, len(sub_ids)):
+            ids = sub_ids[l]
+            params2 = {'page': '2','tag': '','contentType': 'videos','ut': ''}
+            response2 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{ids}/contents', params=params2, headers=headers).json()["data"]
+            for i in response2:
+                url = i["videoDetails"]["videoUrl"]
+                name = i["topic"]
+                # print(name)
+                # print(url)
+                with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
+                    f.write(f"{name}:{url}\n")
+    except:
+        await m.reply_text("Scrapping page_2>>>")
 
 
+    try:
+       sub_ids = raw_text4.split(',')
+       for l in range(0, len(sub_ids)):
+            ids = sub_ids[l]
+            params3 = {'page': '3','tag': '','contentType': 'videos','ut': ''}
+            response3 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{ids}/contents', params=params3, headers=headers).json()["data"]
+            for i in response3:
+                url = i["videoDetails"]["videoUrl"]
+                name = i["topic"]
+                # print(name)
+                # print(url)
+                with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
+                    f.write(f"{name}:{url}\n")
+    except:
+        await m.reply_text("Scrapping page_3>>>")
+
+    
+    try:
+       sub_ids = raw_text4.split(',')
+       for l in range(0, len(sub_ids)):
+            ids = sub_ids[l]
+            params4 = {'page': '4','tag': '','contentType': 'videos','ut': ''}
+            response4 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{ids}/contents', params=params4, headers=headers).json()["data"]
+            for i in response4:
+                url = i["videoDetails"]["videoUrl"]
+                name = i["topic"]
+                # print(name)
+                # print(url)
+                with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
+                    f.write(f"{name}:{url}\n")
+    except:
+        await m.reply_text("Scrapping page_4>>>")
+
+
+
+
+    try:
+       sub_ids = raw_text4.split(',')
+       for l in range(0, len(sub_ids)):
+            ids = sub_ids[l]
+            params5 = {'page': '5','tag': '','contentType': 'videos','ut': ''}
+            response5 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{ids}/contents', params=params5, headers=headers).json()["data"]
+            for i in response5:
+                url = i["videoDetails"]["videoUrl"]
+                name = i["topic"]
+                # print(name)
+                # print(url)
+                with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
+                    f.write(f"{name}:{url}\n")
+    except:
+        await m.reply_text("Scrapping page_5>>>")
+
+
+
+    try:
+       sub_ids = raw_text4.split(',')
+       for l in range(0, len(sub_ids)):
+            ids = sub_ids[l]
+            params6= {'page': '6','tag': '','contentType': 'videos','ut': ''}
+            response6 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{ids}/contents', params=params6, headers=headers).json()["data"]
+            for i in response6:
+                url = i["videoDetails"]["videoUrl"]
+                name = i["topic"]
+                # print(name)
+                # print(url)
+                with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
+                    f.write(f"{name}:{url}\n")
+    except:
+        await m.reply_text("Scrapping page_6>>>")
+
+
+    try:
+       sub_ids = raw_text4.split(',')
+       for l in range(0, len(sub_ids)):
+            ids = sub_ids[l]
+            params7 = {'page': '7','tag': '','contentType': 'videos','ut': ''}
+            response7 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{ids}/contents', params=params7, headers=headers).json()["data"]
+            for i in response7:
+                url = i["videoDetails"]["videoUrl"]
+                name = i["topic"]
+                # print(name)
+                # print(url)
+                with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
+                    f.write(f"{name}:{url}\n")
+    except:
+        await m.reply_text("Scrapping page_7>>>")
+
+
+    try:
+       sub_ids = raw_text4.split(',')
+       for l in range(0, len(sub_ids)):
+            ids = sub_ids[l]
+            params8 = {'page': '8','tag': '','contentType': 'videos','ut': ''}
+            response8 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{ids}/contents', params=params8, headers=headers).json()["data"]
+            for i in response8:
+                url = i["videoDetails"]["videoUrl"]
+                name = i["topic"]
+                # print(name)
+                # print(url)
+                with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
+                    f.write(f"{name}:{url}\n")
+    except:
+        await m.reply_text("Scrapping page_8>>>")
+
+    try:
+       sub_ids = raw_text4.split(',')
+       for l in range(0, len(sub_ids)):
+            ids = sub_ids[l]
+            params9 = {'page': '9','tag': '','contentType': 'videos','ut': ''}
+            response9 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{ids}/contents', params=params9, headers=headers).json()["data"]
+            for i in response9:
+                url = i["videoDetails"]["videoUrl"]
+                name = i["topic"]
+                # print(name)
+                # print(url)
+                with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
+                    f.write(f"{name}:{url}\n")
+    except:
+        await m.reply_text("Scrapping page_9>>>")
+
+
+    try:
+       sub_ids = raw_text4.split(',')
+       for l in range(0, len(sub_ids)):
+            ids = sub_ids[l]
+            params10 = {'page': '10','tag': '','contentType': 'videos','ut': ''}
+            response10 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{ids}/contents', params=params10, headers=headers).json()["data"]
+            for i in response10:
+                url = i["videoDetails"]["videoUrl"]
+                name = i["topic"]
+                # print(name)
+                # print(url)
+                with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
+                    f.write(f"{name}:{url}\n")
+    except:
+        await m.reply_text("Scrapping page_10>>>")
+
+    try:
+       sub_ids = raw_text4.split(',')
+       for l in range(0, len(sub_ids)):
+            ids = sub_ids[l]
+            params11 = {'page': '11','tag': '','contentType': 'videos','ut': ''}
+            response11 = requests.get(f'https://api.penpencil.xyz/v2/batches/{raw_text3}/subject/{ids}/contents', params=params11, headers=headers).json()["data"]
+            for i in response11:
+                url = i["videoDetails"]["videoUrl"]
+                name = i["topic"]
+                # print(name)
+                # print(url)
+                with open(f"{raw_textj}.txt", 'a', encoding='utf-8') as f:
+                    f.write(f"{name}:{url}\n")
+    except:
+        print("scrapping_page11>>>")
+
+
+    try:
+        payload = {}
+        r = requests.get(f'https://api.penpencil.co/v3/batches/{raw_text3}/details', headers=headers, data=payload)
+
+        a =r.json()['data']['subjects']
+        # d = a['data']['subjects']
+        subid= ""
+        for data in a:
+            batches=f"{data['_id']}&"
+            try:
+                topicids = batches.split('&')
+                for l in range(0,len(topicids)):
+                    downid =topicids[l]
+                    # print(downid)
+                    p1 = {'page': '1','contentType': 'notes',}
+
+                    r1 = requests.get(f'https://api.penpencil.co/v2/batches/{raw_text3}/subject/{downid}/contents', params=p1, headers=headers,)
+                    a = r1.json()['data']
+                    # print(a)
+                    for i in a:
+                        data = i['homeworkIds'][0]['attachmentIds'][0]
+                        baseurl = data['baseUrl']
+                        key = data['key']
+                        links = baseurl+key
+                        name = data['name']
+                        # print(data['name']+": "+links)
+                        with open("testfinal.txt", 'a') as f:
+                            f.write(f'{name}: {links}\n')
+
+            except:
+                m.reply_text("scrapping pdfs")
+
+
+
+    except Exception as e:
+        m.reply_text(str(e))
+
+
+    try:
+        await m.reply_document(f"{raw_textj}.txt")
+        await m.reply_text("done")
+
+    except Exception as e:
+        await m.reply_text(str(e))
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 bot.run()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                                                              
