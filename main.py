@@ -539,7 +539,7 @@ async def account_login(bot: Client, m: Message):
     'mode': '1',
     'sort': 'TAG_LIST',
     }
-    await m.replt_text("**You have these Batches :-\n\n Batch ID : Batch Name**")
+    await m.reply_text("**You have these Batches :-\n\n Batch ID : Batch Name**")
     response = requests.get('https://api.penpencil.co/v3/batches/all-purchased-batches', params=params, headers=headers)
     a = response.json()
     # print("you have these batches:\n")
