@@ -492,7 +492,8 @@ async def account_login(bot: Client, m: Message):
     response = requests.get('https://api.penpencil.co/v3/batches/all-purchased-batches', params=params, headers=headers)
     a = response.json()
     print("you have these batches:\n")
-    for i in a['data']:
+    d = a['data']
+    for i in d:
         v = i['batch']['_id']
         batch_name =i['batch']['name']
         # batches = i['batch']['name']+":"+i['batch']['_id']
