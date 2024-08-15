@@ -809,7 +809,7 @@ async def account_login(bot: Client, m: Message):
                         links = baseurl+key
                         name = data['name']
                         # print(data['name']+": "+links)
-                        with open("testfinal.txt", 'a') as f:
+                        with open("testfinal.txt", 'a', encoding='utf-8') as f:
                             f.write(f'{name}: {links}\n')
 
             except:
